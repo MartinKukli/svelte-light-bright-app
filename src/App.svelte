@@ -2,14 +2,10 @@
   import ColorButton from './lib/ColorButton.svelte';
 
   let isMouseDown = false;
-  let buttonsArr = new Array(calcButtonCount());
+  let buttonsArr = new Array(100);
 
-  function calcButtonCount() {
-    const boxRowCount = parseInt((window.innerWidth / 48).toFixed());
-
-    const boxColCount = parseInt((window.innerHeight / 48).toFixed());
-
-    return boxRowCount * boxColCount;
+  function resetAll() {
+    console.log('reset all');
   }
 
   function mouseIsDown() {
@@ -25,9 +21,15 @@
   on:mousedown|preventDefault={mouseIsDown}
   on:mouseup|preventDefault={mouseIsUp}
 >
-  {#each buttonsArr as _}
-    <ColorButton {isMouseDown} />
-  {/each}
+  <section class="buttons">
+    <button type="button">Reset button</button>
+    <button type="button" on:click={resetAll}>Reset all</button>
+  </section>
+  <section class="colors">
+    {#each buttonsArr as _}
+      <ColorButton {isMouseDown} />
+    {/each}
+  </section>
 </main>
 
 <style>
@@ -35,8 +37,17 @@
     background-color: black;
   }
 
-  main {
+  .buttons {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .colors {
+    border-style: solid;
+    border-top-color: purple;
+    border-top-width: 1px;
     display: flex;
     flex-wrap: wrap;
+    margin-top: 20px;
   }
 </style>

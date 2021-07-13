@@ -2,21 +2,32 @@
   import { generateButtonStyle } from '../utility/Utility';
 
   export let isMouseDown;
-  let buttonStyle = generateButtonStyle();
+  let buttonStyle;
 
-  function handleClick() {
-    if (isMouseDown) {
-      buttonStyle = generateButtonStyle();
-    }
+  function updateColor() {
+    buttonStyle = generateButtonStyle();
+  }
+
+  function clearColor() {
+    buttonStyle = undefined;
+  }
+
+  function handleMouseOver() {
+    isMouseDown && updateColor();
   }
 </script>
 
-<p class="button" style={buttonStyle} on:mouseover={handleClick} />
+<p
+  class="button"
+  style={buttonStyle}
+  on:click={updateColor}
+  on:dblclick={clearColor}
+  on:mouseover={handleMouseOver}
+/>
 
 <style>
   .button {
     border-radius: 100%;
-    border: none;
     box-sizing: border-box;
     cursor: pointer;
     height: 50px;
