@@ -1,15 +1,13 @@
 <script lang="ts">
   import ColorButton from './lib/ColorButton.svelte';
+  import { buttons, changeStyle, reset, resetAll } from './utilities/store';
 
   let isMouseDown = false;
-  let buttonsArr = new Array(100);
-
-  function resetAll() {
-    console.log('reset all');
-  }
 
   function mouseIsDown() {
     isMouseDown = true;
+
+    changeStyle();
   }
 
   function mouseIsUp() {
@@ -22,12 +20,12 @@
   on:mouseup|preventDefault={mouseIsUp}
 >
   <section class="buttons">
-    <button type="button">Reset button</button>
+    <button type="button" on:click={reset}>Reset button</button>
     <button type="button" on:click={resetAll}>Reset all</button>
   </section>
   <section class="colors">
-    {#each buttonsArr as _}
-      <ColorButton {isMouseDown} />
+    {#each $buttons as value, key}
+      <ColorButton id={key} color={value} {isMouseDown} />
     {/each}
   </section>
 </main>

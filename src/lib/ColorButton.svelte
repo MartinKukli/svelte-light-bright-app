@@ -1,27 +1,30 @@
-<script>
-  import { generateButtonStyle } from '../utility/Utility';
+<script lang="ts">
+  import { reset, updateClickedButton } from '../utilities/store';
 
-  export let isMouseDown;
-  let buttonStyle;
+  export let id: number;
+  export let color: string;
+  export let isMouseDown: boolean;
 
   function updateColor() {
-    buttonStyle = generateButtonStyle();
+    updateClickedButton(id);
   }
 
-  function clearColor() {
-    buttonStyle = undefined;
+  function resetColor() {
+    updateClickedButton(id);
+    reset();
   }
 
   function handleMouseOver() {
-    isMouseDown && updateColor();
+    isMouseDown && updateClickedButton(id);
   }
 </script>
 
 <p
+  id={id.toString()}
   class="button"
-  style={buttonStyle}
+  style={color}
   on:click={updateColor}
-  on:dblclick={clearColor}
+  on:dblclick={resetColor}
   on:mouseover={handleMouseOver}
 />
 
