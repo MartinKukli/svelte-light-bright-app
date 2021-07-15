@@ -16,14 +16,19 @@
 </script>
 
 <main
+  class="main"
   on:mousedown|preventDefault={mouseIsDown}
   on:mouseup|preventDefault={mouseIsUp}
 >
-  <section class="buttons">
-    <button type="button" on:click={reset}>Reset button</button>
-    <button type="button" on:click={resetAll}>Reset all</button>
+  <section class="buttons buttons--max-width">
+    <button class="buttons__button" type="button" on:click={reset}
+      >Reset button</button
+    >
+    <button class="buttons__button" type="button" on:click={resetAll}
+      >Reset all</button
+    >
   </section>
-  <section class="colors">
+  <section class="colors colors--max-width">
     {#each $buttons as value, key}
       <ColorButton id={key} color={value} {isMouseDown} />
     {/each}
@@ -38,14 +43,37 @@
   .buttons {
     display: flex;
     justify-content: space-around;
+    margin: 20px auto 20px auto;
+  }
+
+  .buttons--max-width {
+    width: 50%;
+  }
+
+  .buttons__button {
+    background-color: black;
+    color: white;
+    border: 1px solid purple;
+    border-radius: 10%;
+    padding: 9px;
+    font-size: large;
+  }
+
+  .buttons__button:hover {
+    cursor: pointer;
   }
 
   .colors {
-    border-style: solid;
-    border-top-color: purple;
-    border-top-width: 1px;
+    border-bottom: 1px solid purple;
+    border-top: 1px solid purple;
     display: flex;
     flex-wrap: wrap;
-    margin-top: 20px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+
+  .colors--max-width {
+    margin: auto;
+    width: 50%;
   }
 </style>

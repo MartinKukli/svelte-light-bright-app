@@ -1,6 +1,8 @@
 import { Writable, writable } from 'svelte/store';
 import { generateButtonStyle } from './Utility';
 
+const BUTTONS_COUNT = 105;
+
 export const buttons: Writable<string[]> = writable(generateButtonsArray());
 let currentStyle = '';
 let lastClickedButtonId = 0;
@@ -33,5 +35,5 @@ export function updateClickedButton(id: number) {
 }
 
 function generateButtonsArray(): string[] {
-  return new Array(100).map((value) => (value = ''));
+  return new Array(BUTTONS_COUNT).map((value) => (value = ''));
 }
