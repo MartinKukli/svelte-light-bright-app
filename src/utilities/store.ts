@@ -1,5 +1,5 @@
 import { Writable, writable } from 'svelte/store';
-import { generateButtonStyle } from './Utility';
+import { generateButtonStyle } from './utility';
 
 const BUTTONS_COUNT = 105;
 
